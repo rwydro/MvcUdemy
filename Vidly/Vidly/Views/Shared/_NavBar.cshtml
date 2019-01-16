@@ -1,0 +1,44 @@
+﻿
+<body>
+<style>
+    .topBar {
+        float: left;
+        width: 100%;
+        margin-bottom: 20px;
+        border-top: white;
+        border-style: outset;
+    }
+    .divTopBar { 
+        background: white;
+        margin-left: 100px;
+        overflow: auto;  
+    }
+    .divTopBar a {
+        text-align: center;
+        font-size: 40px;
+        margin-left: 20px;
+        padding: 14px 16px;
+        float: left;
+        color: grey;
+    }
+    .homeTopBar {
+        text-align: center;
+        font-size: 40px;
+        float: left;
+        margin-left: 100px
+    }
+    .divTopBar a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+</style>
+<div class="topBar">
+    <div class="divTopBar">
+        @Html.ActionLink("home", "index", "home", null, new { @class = "homeTopBar" })
+        @Html.ActionLink("movies", "showmovies", "movies")
+        @Html.ActionLink("customer", "showcustomers", "customer")
+        @Html.ActionLink("contact", "contact", "home")
+    </div>
+</div>
+</body>
+
