@@ -26,7 +26,7 @@ namespace Vidly.Controllers
         {
             if (CustomerList.Any(s => s.Id == id))
                 return View(CustomerList.FirstOrDefault(c => c.Id == id));
-            return 
+            return HttpNotFound();
         }
 
         [Route("customer/{name}")]
