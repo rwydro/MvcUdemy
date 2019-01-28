@@ -21,6 +21,7 @@ namespace Vidly
             //    new {controller = "Movies", action = "ByReleasedYear"},
             //    new { year = "2015|2016", month = @"\d{2}"});
 
+            
 
             routes.MapRoute(
                 name: "Default",

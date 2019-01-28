@@ -6,18 +6,24 @@ using System.Web;
 using System.Web.Mvc;
 using Vidly.Models;
 using Vidly.ViewModels;
+using System.Data.Entity;
 using String = System.String;
 
 namespace Vidly.Controllers
 {
     public class MoviesController : Controller
     {
-        private List<Movie> MoviesList = new List<Movie>()
-        {
-            new Movie(){Name = "Shrek"},
-            new Movie(){Name = "Ice Age"}
-        };
+        private MyDbContext context;
+        //private List<Movie> MoviesList = new List<Movie>()
+        //{
+        //    new Movie(){Name = "Shrek"},
+        //    new Movie(){Name = "Ice Age"}
+        //};
 
+        public MoviesController()
+        {
+            context = new MyDbContext();
+        }
         // GET: Movies/Random
         public ActionResult Random()
         {
@@ -39,7 +45,7 @@ namespace Vidly.Controllers
         [Route("movies/show-movies")]
         public ActionResult ShowMovies()
         {
-            return View(MoviesList);
+            return View(context.Movies.Include(c => c.Genre).ToList());
         }
 
         public ActionResult Edit(int id)
@@ -57,13 +63,13 @@ namespace Vidly.Controllers
         [Route("movies/{name}")]
         public ActionResult MovieByName(string name)
         {
-            return View(MoviesList.FirstOrDefault(s => s.Name == name));
+            return View(context.Movies.Include(c=>c.Genre).FirstOrDefault(s => s.Name == name));
         }
 
         [Route("movies/Details/{id}")]
         public ActionResult Details(int id)
         {
-           return View(MoviesList.FirstOrDefault(c => c.Id == id)); 
+           return View(context.Movies.Include(c => c.Genre).FirstOrDefault(c => c.Id == id)); 
         }
 
 

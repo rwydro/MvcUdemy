@@ -1,6 +1,6 @@
 ﻿@model Vidly.Models.Movie
 @{
-    ViewBag.Title = "Customer";
+    ViewBag.Title = "Movie";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <html>
@@ -8,9 +8,37 @@
     <title>title</title>
 </head>
 <body>
-    <div>
-        <a>
-            @Model.Name
-        </a>
-    </div>
+<style>
+    .customerHeader {
+        font-size: 40px;
+        color: black;
+    }
+    ul {
+        margin-bottom: 10px;
+        margin-left: 10px;
+        font-size: 20px;
+    }
+</style>
+<div>
+    <p class="customerHeader">
+        @Model.Name
+        <ul>
+            <li>
+                Membership Type: @Model.Genre.Name
+            </li>
+            <li>
+                Genre: @Model.Genre.Name
+            </li>
+            <li>
+                Released date: @Model.ReleaseDate
+            </li>
+            <li>
+                Date Added: @Model.AddedDate
+            </li>
+            <li>
+                Number in Stock: @Model.NumberInStock
+            </li>
+        </ul>
+    </p>
+</div>
 </body>

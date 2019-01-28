@@ -8,10 +8,30 @@
     <title>title</title>
 </head>
 <body>
+<style>
+    .customerHeader {
+    font-size: 40px;
+    color: black;
+    }
+    ul {
+        margin-bottom: 10px;
+        margin-left: 10px;
+        font-size: 20px;
+    }
+</style>
 <div>
 
-    <a>
+    <p class="customerHeader">
         @Model.Name
-    </a>
+        <ul>
+            <li>
+                Membership Type: @Model.MembershipType.Name
+            </li>
+            @if (@Model.BirthDate != null)
+            {
+                <li>@Model.BirthDate</li>
+            }
+        </ul>
+    </p>
 </div>
 </body>

@@ -162,16 +162,54 @@
     <Compile Include="Migrations\201901242012287_AddSubscribedToCustomer.Designer.cs">
       <DependentUpon>201901242012287_AddSubscribedToCustomer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901242018454_AddMembershipType.cs" />
-    <Compile Include="Migrations\201901242018454_AddMembershipType.Designer.cs">
-      <DependentUpon>201901242018454_AddMembershipType.cs</DependentUpon>
+    <Compile Include="Migrations\201901261602096_AddMembershipType.cs" />
+    <Compile Include="Migrations\201901261602096_AddMembershipType.Designer.cs">
+      <DependentUpon>201901261602096_AddMembershipType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901261605164_PopulateMembershipTypes.cs" />
+    <Compile Include="Migrations\201901261605164_PopulateMembershipTypes.Designer.cs">
+      <DependentUpon>201901261605164_PopulateMembershipTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901261617110_ApplyAnnotationsToCustomerName.cs" />
+    <Compile Include="Migrations\201901261617110_ApplyAnnotationsToCustomerName.Designer.cs">
+      <DependentUpon>201901261617110_ApplyAnnotationsToCustomerName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901261649178_AddNameToMembershipType.cs" />
+    <Compile Include="Migrations\201901261649178_AddNameToMembershipType.Designer.cs">
+      <DependentUpon>201901261649178_AddNameToMembershipType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901261652207_InserNamesInMembershipTypes.cs" />
+    <Compile Include="Migrations\201901261652207_InserNamesInMembershipTypes.Designer.cs">
+      <DependentUpon>201901261652207_InserNamesInMembershipTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901261725142_AddBirthDateForCustomer.cs" />
+    <Compile Include="Migrations\201901261725142_AddBirthDateForCustomer.Designer.cs">
+      <DependentUpon>201901261725142_AddBirthDateForCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901281951246_GenerateGenreTable.cs" />
+    <Compile Include="Migrations\201901281951246_GenerateGenreTable.Designer.cs">
+      <DependentUpon>201901281951246_GenerateGenreTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901281952277_GenerateGenreTablePoprawka.cs" />
+    <Compile Include="Migrations\201901281952277_GenerateGenreTablePoprawka.Designer.cs">
+      <DependentUpon>201901281952277_GenerateGenreTablePoprawka.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901282000264_UpdateGenerateGenreTablePoprawka.cs" />
+    <Compile Include="Migrations\201901282000264_UpdateGenerateGenreTablePoprawka.Designer.cs">
+      <DependentUpon>201901282000264_UpdateGenerateGenreTablePoprawka.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901282013014_UpdateGenerateGenreTableIdAsByte.cs" />
+    <Compile Include="Migrations\201901282013014_UpdateGenerateGenreTableIdAsByte.Designer.cs">
+      <DependentUpon>201901282013014_UpdateGenerateGenreTableIdAsByte.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\MyDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\NewCustomerViewModel.cs" />
     <Compile Include="ViewModels\RandomMovieViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +258,7 @@
     <Content Include="Views\Customer\Details.cshtml" />
     <Content Include="Views\Customer\CustomerByName.cshtml" />
     <Content Include="Views\Movies\Details.cshtml" />
+    <Content Include="Views\Customer\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -244,8 +283,35 @@
     <EmbeddedResource Include="Migrations\201901242012287_AddSubscribedToCustomer.resx">
       <DependentUpon>201901242012287_AddSubscribedToCustomer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901242018454_AddMembershipType.resx">
-      <DependentUpon>201901242018454_AddMembershipType.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901261602096_AddMembershipType.resx">
+      <DependentUpon>201901261602096_AddMembershipType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901261605164_PopulateMembershipTypes.resx">
+      <DependentUpon>201901261605164_PopulateMembershipTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901261617110_ApplyAnnotationsToCustomerName.resx">
+      <DependentUpon>201901261617110_ApplyAnnotationsToCustomerName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901261649178_AddNameToMembershipType.resx">
+      <DependentUpon>201901261649178_AddNameToMembershipType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901261652207_InserNamesInMembershipTypes.resx">
+      <DependentUpon>201901261652207_InserNamesInMembershipTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901261725142_AddBirthDateForCustomer.resx">
+      <DependentUpon>201901261725142_AddBirthDateForCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901281951246_GenerateGenreTable.resx">
+      <DependentUpon>201901281951246_GenerateGenreTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901281952277_GenerateGenreTablePoprawka.resx">
+      <DependentUpon>201901281952277_GenerateGenreTablePoprawka.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901282000264_UpdateGenerateGenreTablePoprawka.resx">
+      <DependentUpon>201901282000264_UpdateGenerateGenreTablePoprawka.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901282013014_UpdateGenerateGenreTableIdAsByte.resx">
+      <DependentUpon>201901282013014_UpdateGenerateGenreTableIdAsByte.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
