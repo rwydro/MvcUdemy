@@ -7,7 +7,7 @@
 
 <h2>New Customer</h2>
 
-@using (@Html.BeginForm("Create", "Customers"))
+@using (@Html.BeginForm("Save", "Customer"))
 {
     <div class="form-group">
         @Html.LabelFor(c=>c.Customer.Name)
@@ -20,9 +20,11 @@
     <div class="checkbox">
         <label>
             @Html.CheckBoxFor(c=>c.Customer.IsSubscribedToNewsletter) Is Subscribed to Newsletter?
-        </label>
+        </label> 
     </div>
     <div class="form-group">
-             @Html.DropDownListFor(c=>c.Customer.MembershipType,new SelectList(Model.MembershipTypesList,"Id","Name"),"Select Membership Type", new{@class = "form-control"})
+        @Html.LabelFor(c=>c.Customer.MembershipTypeId)
+        @Html.DropDownListFor(c => c.Customer.MembershipTypeId, new SelectList(Model.MembershipTypesList, "Id", "Name"), "Select Membership Type", new {@class = "form-control"})
+        <button type="submit" class="btn btn-primary">Save</button>
     </div>
 }

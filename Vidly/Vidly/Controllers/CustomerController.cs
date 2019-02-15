@@ -37,6 +37,25 @@ namespace Vidly.Controllers
 
             return View(viewModel);
         }
+            
+        [HttpPost]
+        public ActionResult Save(NewCustomerViewModel newCustomer)
+        {
+            if (newCustomer.Customer.Id == 0)// zawsze mi przychodzi zero nawet jak updajtuje
+            {
+                context.Customers.Add(newCustomer.Customer);
+            }
+            else
+            {
+                var customer = context.Customers.Single(s => s.Id == newCustomer.Customer.Id);
+                customer.Name = newCustomer.Customer.Name;
+                customer.BirthDate = newCustomer.Customer.BirthDate;
+                customer.MembershipTypeId = newCustomer.Customer.MembershipTypeId;
+                customer.IsSubscribedToNewsletter = newCustomer.Customer.IsSubscribedToNewsletter;
+            }
+            context.SaveChanges();
+            return RedirectToAction("ShowCustomers", "Customer");
+        }
 
         [Route("customer/show-customers")]
         public ActionResult ShowCustomers()
@@ -56,6 +75,21 @@ namespace Vidly.Controllers
         public ActionResult CustomerByName(string name)
         {
             return View(context.Customers.FirstOrDefault(s => s.Name == name));
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var customer = context.Customers.SingleOrDefault(s => s.Id == id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            var correctCustomer = new NewCustomerViewModel()
+            {
+                Customer = customer,
+                MembershipTypesList = this.context.MembershipType.ToList()
+        };
+            return View("New", correctCustomer);
         }
     }
 }
