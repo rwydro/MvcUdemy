@@ -10,46 +10,71 @@
     @Styles.Render("~/Content/css")
 </head>
 <body>
-<style>
-    .mainDiv {
-       
-    }
-    .customerHeader {
-        font-size: 50px;
-        color: black;
-        float: inherit;
-    }
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-    }
+    <style>
+        .mainDiv {
+        }
 
-    td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-        font-size: 25px;
-    }
+        .customerHeader {
+            font-size: 50px;
+            color: black;
+            float: inherit;
+        }
 
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }
-</style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
 
-<h1 class="customerHeader">Customers</h1>
-<table >
-    <tr >
-        <th>Customers</th>
-        <th>Membership Type</th>
-    </tr>
-    @foreach (var item in @Model)
-    {
-    <tr>
-        <td>@Html.ActionLink(@item.Name , "Edit" ,"Customer", new {id = @item.Id},null)</td>
-        <td>@item.MembershipType.Name</td>
-    </tr>
-    }
-</table>
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            font-size: 25px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        .buttonNew {
+            margin-left: 50px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        .removeButton {
+            background-color: transparent;
+        }
+    </style>
+    <div class="d-inline">
+        @using (@Html.BeginForm("New", "Customer"))
+        {
+            <h1 class="customerHeader d-inline">Customers</h1>
+            <button type="submit" class="btn btn-primary btn-lg buttonNew">New Customer</button>  
+        }
+    </div>
+    <table>
+        <tr>
+            <th>Customers</th>
+            <th>Membership Type</th>
+        </tr>
+        @foreach (var item in @Model)
+        {
+          <tr class="table table-striped, text-center">
+
+                    <td>@Html.ActionLink(@item.Name, "Edit", "Customer", new {id = @item.Id}, null)</td>
+                    <td>@item.MembershipType.Name
+
+                    </td>
+                    <td>
+                        @using (@Html.BeginForm("Delete", "Customer",new {id = item.Id}))
+                        {
+                            <button class="removeButton btn glyphicon glyphicon-remove-circle d-inline"></button>
+                        }
+                    </td>
+                </tr>
+            
+        }
+    </table>
 </body>
 </html>

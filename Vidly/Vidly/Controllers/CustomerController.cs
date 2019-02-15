@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
+using System.IO;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using Vidly.Models;
 using Vidly.ViewModels;
 
@@ -11,11 +13,6 @@ namespace Vidly.Controllers
     public class CustomerController : Controller
     {
         private MyDbContext context;
-        private List<Customer> CustomerList = new List<Customer>()
-        {
-            new Customer(){Name = "Kazek",Id = 0},
-            new Customer(){Name = "Wladek", Id = 1}
-        };
 
         public CustomerController()
         {
@@ -30,16 +27,17 @@ namespace Vidly.Controllers
         public ActionResult New()
         {
             var membershipTypes = this.context.MembershipType.ToList();
-            var viewModel = new NewCustomerViewModel()
+            var viewModel = new CustomerViewModel()
             {
                 MembershipTypesList = membershipTypes
             };
 
-            return View(viewModel);
+            return View("CustomerForm",viewModel);
         }
             
+  
         [HttpPost]
-        public ActionResult Save(NewCustomerViewModel newCustomer)
+        public ActionResult Save(CustomerViewModel newCustomer)
         {
             if (newCustomer.Customer.Id == 0)// zawsze mi przychodzi zero nawet jak updajtuje
             {
@@ -84,12 +82,20 @@ namespace Vidly.Controllers
             {
                 return HttpNotFound();
             }
-            var correctCustomer = new NewCustomerViewModel()
+            var correctCustomer = new CustomerViewModel()
             {
                 Customer = customer,
                 MembershipTypesList = this.context.MembershipType.ToList()
         };
-            return View("New", correctCustomer);
+            return View("CustomerForm", correctCustomer);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            var deletedCustomer = context.Customers.FirstOrDefault(s => s.Id == id);
+            if (deletedCustomer != null) this.context.Customers.Remove(deletedCustomer);
+            context.SaveChanges();
+            return RedirectToAction("ShowCustomers", "Customer");
         }
     }
 }
