@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Vidly.Models;
 using Vidly.ViewModels;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using String = System.String;
 
 namespace Vidly.Controllers
@@ -14,11 +15,6 @@ namespace Vidly.Controllers
     public class MoviesController : Controller
     {
         private MyDbContext context;
-        //private List<Movie> MoviesList = new List<Movie>()
-        //{
-        //    new Movie(){Name = "Shrek"},
-        //    new Movie(){Name = "Ice Age"}
-        //};
 
         public MoviesController()
         {
@@ -50,7 +46,17 @@ namespace Vidly.Controllers
 
         public ActionResult Edit(int id)
         {
-            return Content("id=" + id);
+            var movie = this.context.Movies.Include(c => c.Genre).FirstOrDefault(s => s.Id == id);
+            if (movie == null)
+            {
+                return HttpNotFound();
+            }
+            var movieViewModel = new MovieViewModel()
+            {
+                Movie = movie,
+                GenreList = this.context.GenreType.ToList()
+            };
+            return View("MovieForm",movieViewModel);
         }
 
         [Route("movies/released/{year}/{month:regex(^\\d{2}$):range(1,12)}")]
@@ -60,7 +66,6 @@ namespace Vidly.Controllers
             return Content($"{movie.Name} was released {month}-{year}");
         }
 
-        [Route("movies/{name}")]
         public ActionResult MovieByName(string name)
         {
             return View(context.Movies.Include(c=>c.Genre).FirstOrDefault(s => s.Name == name));
@@ -80,6 +85,54 @@ namespace Vidly.Controllers
             if (String.IsNullOrEmpty(sortBy))
                 sortBy = "Name";
             return Content(String.Format("pageIndex={0}&sortBy={1}", pageIndex, sortBy));
+        }
+
+        public ActionResult New()
+        {
+            var movieMiewModel = new MovieViewModel()
+            {
+                GenreList = this.context.GenreType
+            };
+            return View("MovieForm", movieMiewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Save(MovieViewModel viewModel)
+        {
+
+            try
+            {
+
+                if (viewModel.Movie.Id == 0)
+                {
+                    viewModel.Movie.AddedDate = DateTime.Now;
+                    this.context.Movies.Add(viewModel.Movie);
+                }
+                else
+                {
+                    var movie = this.context.Movies.Single(s => s.Id == viewModel.Movie.Id);
+                    movie.Name = viewModel.Movie.Name;
+                    movie.ReleaseDate = viewModel.Movie.ReleaseDate;
+                    movie.GenreId = viewModel.Movie.GenreId;
+                    movie.NumberInStock = viewModel.Movie.NumberInStock;
+                }
+
+                this.context.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+            
+            }
+
+            return RedirectToAction("ShowMovies", "Movies");
+        }
+
+        public ActionResult Delete(int id)
+        {
+            var deletedCustomer = context.Movies.FirstOrDefault(s => s.Id == id);
+            if (deletedCustomer != null) this.context.Movies.Remove(deletedCustomer);
+            context.SaveChanges();
+            return RedirectToAction("ShowMovies", "Movies");
         }
     }
 }

@@ -202,6 +202,18 @@
     <Compile Include="Migrations\201901282013014_UpdateGenerateGenreTableIdAsByte.Designer.cs">
       <DependentUpon>201901282013014_UpdateGenerateGenreTableIdAsByte.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902152234103_NotNullMovieName.cs" />
+    <Compile Include="Migrations\201902152234103_NotNullMovieName.Designer.cs">
+      <DependentUpon>201902152234103_NotNullMovieName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902152246364_GenreParameterRequired.cs" />
+    <Compile Include="Migrations\201902152246364_GenreParameterRequired.Designer.cs">
+      <DependentUpon>201902152246364_GenreParameterRequired.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902152250315_GenreIdParameterRequired.cs" />
+    <Compile Include="Migrations\201902152250315_GenreIdParameterRequired.Designer.cs">
+      <DependentUpon>201902152250315_GenreIdParameterRequired.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Genre.cs" />
@@ -210,6 +222,7 @@
     <Compile Include="Models\MyDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
+    <Compile Include="ViewModels\MovieViewModel.cs" />
     <Compile Include="ViewModels\RandomMovieViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +272,7 @@
     <Content Include="Views\Customer\CustomerByName.cshtml" />
     <Content Include="Views\Movies\Details.cshtml" />
     <Content Include="Views\Customer\CustomerForm.cshtml" />
+    <Content Include="Views\Movies\MovieForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -312,6 +326,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901282013014_UpdateGenerateGenreTableIdAsByte.resx">
       <DependentUpon>201901282013014_UpdateGenerateGenreTableIdAsByte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902152234103_NotNullMovieName.resx">
+      <DependentUpon>201902152234103_NotNullMovieName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902152246364_GenreParameterRequired.resx">
+      <DependentUpon>201902152246364_GenreParameterRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902152250315_GenreIdParameterRequired.resx">
+      <DependentUpon>201902152250315_GenreIdParameterRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

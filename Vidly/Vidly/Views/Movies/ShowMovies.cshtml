@@ -12,13 +12,14 @@
 <body>
 <style>
     .mainDiv {
-       
     }
-    .moviesHeader {
+
+    .movieHeader {
         font-size: 50px;
         color: black;
         float: inherit;
     }
+
     table {
         font-family: arial, sans-serif;
         border-collapse: collapse;
@@ -35,8 +36,21 @@
     tr:nth-child(even) {
         background-color: #dddddd;
     }
-</style>
 
+    .buttonNew {
+        margin-left: 50px;
+        margin-bottom: 20px;
+        font-size: 16px;
+    }
+    .removeButton {
+        background-color: transparent;
+    }
+</style>
+@using (@Html.BeginForm("New", "Movies"))
+{
+    <h1 class="movieHeader d-inline">Customers</h1>
+    <button type="submit" class="btn btn-primary btn-lg buttonNew">New Movie</button>  
+}
     <h1 class="moviesHeader">Movies</h1>
     <table >
         <tr>
@@ -46,8 +60,14 @@
         @foreach (var item in @Model)
         {
             <tr>
-                <td>@Html.ActionLink(@item.Name, "Details", "Movies",new {id = @item.Id},null)</td>
+                <td>@Html.ActionLink(@item.Name, "Edit", "Movies",new {id = @item.Id},null)</td>
                 <td>@item.Genre.Name</td>
+                <td>
+                    @using (@Html.BeginForm("Delete", "Movies",new {id = item.Id}))
+                    {
+                        <button class="removeButton btn glyphicon glyphicon-remove-circle d-inline"></button>
+                    }
+                </td>
             </tr>
         }
     </table>
