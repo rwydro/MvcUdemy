@@ -5,25 +5,38 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>New Movie</h2>
+<h2>@Model.Title</h2>
+@Html.ValidationSummary(false,"Please fix the below problems")
 
 @using (Html.BeginForm("Save", "Movies"))
 {
     <div>
         @Html.LabelFor(c => c.Movie.Name)
         @Html.TextBoxFor(c => c.Movie.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(s=>s.Movie.Name)
     </div>
     <div>
         @Html.LabelFor(c => c.Movie.ReleaseDate)
         @Html.TextBoxFor(c => c.Movie.ReleaseDate, new { @class = "form-control" })
+        @Html.ValidationMessageFor(s=>s.Movie.ReleaseDate)
     </div>
     <div>
         @Html.LabelFor(c => c.Movie.NumberInStock)
         @Html.TextBoxFor(c => c.Movie.NumberInStock, new { @class = "form-control" })
+        @Html.ValidationMessageFor(s => s.Movie.NumberInStock)
     </div>
     <div>
         @Html.LabelFor(c => c.Movie.Genre)
         @Html.DropDownListFor(c => c.Movie.GenreId, new SelectList(Model.GenreList, "Id", "Name"), "Select Membership Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(s => s.Movie.GenreId)
+    </div>
+    <div>
+        @Html.HiddenFor(m => m.Movie.Id)
+        @Html.AntiForgeryToken()
         <button type="submit" class="btn btn-primary">Save</button>
     </div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jquery")
+}
 }

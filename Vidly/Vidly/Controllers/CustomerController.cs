@@ -29,6 +29,7 @@ namespace Vidly.Controllers
             var membershipTypes = this.context.MembershipType.ToList();
             var viewModel = new CustomerViewModel()
             {
+                Customer = new Customer(),
                 MembershipTypesList = membershipTypes
             };
 
@@ -37,9 +38,20 @@ namespace Vidly.Controllers
             
   
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(CustomerViewModel newCustomer)
         {
-            if (newCustomer.Customer.Id == 0)// zawsze mi przychodzi zero nawet jak updajtuje
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new CustomerViewModel()
+                {
+                    Customer = newCustomer.Customer,
+                    MembershipTypesList = this.context.MembershipType.ToList()
+                };
+                return View("CustomerForm", viewModel);
+            }
+
+            if (newCustomer.Customer.Id == 0)
             {
                 context.Customers.Add(newCustomer.Customer);
             }
@@ -47,7 +59,7 @@ namespace Vidly.Controllers
             {
                 var customer = context.Customers.Single(s => s.Id == newCustomer.Customer.Id);
                 customer.Name = newCustomer.Customer.Name;
-                customer.BirthDate = newCustomer.Customer.BirthDate;
+               // customer.BirthDate = newCustomer.Customer.BirthDate;
                 customer.MembershipTypeId = newCustomer.Customer.MembershipTypeId;
                 customer.IsSubscribedToNewsletter = newCustomer.Customer.IsSubscribedToNewsletter;
             }

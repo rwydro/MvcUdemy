@@ -6,6 +6,12 @@ using System.Web;
 
 namespace Vidly.Models
 {
+    public enum MembershipTypeEnum
+    {
+        Uknown = 0,
+        PayAsYouGo = 1
+    }
+
     public class MembershipType
     {
         public byte Id { get; set; }

@@ -210,16 +210,26 @@
     <Compile Include="Migrations\201902152246364_GenreParameterRequired.Designer.cs">
       <DependentUpon>201902152246364_GenreParameterRequired.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902152250315_GenreIdParameterRequired.cs" />
-    <Compile Include="Migrations\201902152250315_GenreIdParameterRequired.Designer.cs">
-      <DependentUpon>201902152250315_GenreIdParameterRequired.cs</DependentUpon>
+    <Compile Include="Migrations\201902161502506_RemoveBirthDate.cs" />
+    <Compile Include="Migrations\201902161502506_RemoveBirthDate.Designer.cs">
+      <DependentUpon>201902161502506_RemoveBirthDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902161503243_DateOfBirthAsDateTime.cs" />
+    <Compile Include="Migrations\201902161503243_DateOfBirthAsDateTime.Designer.cs">
+      <DependentUpon>201902161503243_DateOfBirthAsDateTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902191913468_jakasMigracja.cs" />
+    <Compile Include="Migrations\201902191913468_jakasMigracja.Designer.cs">
+      <DependentUpon>201902191913468_jakasMigracja.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\MembershipType.cs" />
+    <Compile Include="Models\Min18YearsIfAMember.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\MyDbContext.cs" />
+    <Compile Include="Models\NumberInStockValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\MovieViewModel.cs" />
@@ -333,8 +343,14 @@
     <EmbeddedResource Include="Migrations\201902152246364_GenreParameterRequired.resx">
       <DependentUpon>201902152246364_GenreParameterRequired.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902152250315_GenreIdParameterRequired.resx">
-      <DependentUpon>201902152250315_GenreIdParameterRequired.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902161502506_RemoveBirthDate.resx">
+      <DependentUpon>201902161502506_RemoveBirthDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902161503243_DateOfBirthAsDateTime.resx">
+      <DependentUpon>201902161503243_DateOfBirthAsDateTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902191913468_jakasMigracja.resx">
+      <DependentUpon>201902191913468_jakasMigracja.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

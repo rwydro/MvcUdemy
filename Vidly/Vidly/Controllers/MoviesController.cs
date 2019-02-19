@@ -91,38 +91,42 @@ namespace Vidly.Controllers
         {
             var movieMiewModel = new MovieViewModel()
             {
+                Movie = new Movie(),
                 GenreList = this.context.GenreType
             };
             return View("MovieForm", movieMiewModel);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(MovieViewModel viewModel)
         {
-
-            try
+            if (!ModelState.IsValid) 
             {
-
-                if (viewModel.Movie.Id == 0)
+                var newViewModel = new MovieViewModel()
                 {
-                    viewModel.Movie.AddedDate = DateTime.Now;
-                    this.context.Movies.Add(viewModel.Movie);
-                }
-                else
-                {
-                    var movie = this.context.Movies.Single(s => s.Id == viewModel.Movie.Id);
-                    movie.Name = viewModel.Movie.Name;
-                    movie.ReleaseDate = viewModel.Movie.ReleaseDate;
-                    movie.GenreId = viewModel.Movie.GenreId;
-                    movie.NumberInStock = viewModel.Movie.NumberInStock;
-                }
-
-                this.context.SaveChanges();
+                    Movie = new Movie(),
+                    GenreList = this.context.GenreType.ToList()
+                };
+                return View("MovieForm", newViewModel);
             }
-            catch (DbEntityValidationException e)
+
+            if (viewModel.Movie.Id == 0)
             {
+                viewModel.Movie.AddedDate = DateTime.Now;
+                this.context.Movies.Add(viewModel.Movie);
+            }
+            else
+            {
+                var movie = this.context.Movies.Single(s => s.Id == viewModel.Movie.Id);
+                movie.Name = viewModel.Movie.Name;
+                movie.ReleaseDate = viewModel.Movie.ReleaseDate;
+                movie.GenreId = viewModel.Movie.GenreId;
+                movie.NumberInStock = viewModel.Movie.NumberInStock;
+            }
+
+            this.context.SaveChanges();
             
-            }
 
             return RedirectToAction("ShowMovies", "Movies");
         }
